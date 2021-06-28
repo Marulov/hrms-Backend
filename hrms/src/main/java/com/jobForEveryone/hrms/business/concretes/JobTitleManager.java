@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.jobForEveryone.hrms.business.abstracts.JobTitleService;
 import com.jobForEveryone.hrms.core.utilities.results.DataResult;
+import com.jobForEveryone.hrms.core.utilities.results.ErrorResult;
 import com.jobForEveryone.hrms.core.utilities.results.Result;
 import com.jobForEveryone.hrms.core.utilities.results.SuccessDataResult;
 import com.jobForEveryone.hrms.core.utilities.results.SuccessResult;
@@ -32,8 +33,20 @@ public class JobTitleManager implements JobTitleService{
 
 	@Override
 	public Result add(JobTitle jobTitle) {
+		
+		if(!CheckTitle(jobTitle.getTitle())) {
+			return new ErrorResult("Title tekrar edemez!");
+		}
+		
 		this.jobTitleDao.save(jobTitle);
 		return new SuccessResult("Pozisyon eklendi.");
+	}
+	
+	private boolean CheckTitle(String title) {
+		if(this.jobTitleDao.getByTitle(title) == null) {
+			return true;
+		}
+		return false;
 	}
 
 
