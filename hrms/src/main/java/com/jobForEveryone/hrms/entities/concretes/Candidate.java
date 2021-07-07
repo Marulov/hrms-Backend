@@ -16,8 +16,8 @@ public class Candidate extends User {
 	@Column(name="id")
 	private int id;
 	
-	@Column(name="firt_name")
-	private String firstName;
+	@Column(name="first_name")
+	private String firstName;		
 	
 	@Column(name="last_name")
 	private String lastName;
@@ -32,15 +32,16 @@ public class Candidate extends User {
 		
 	}
 
-	public Candidate(int id, String email, String password, int id2, String firstName, String lastName,
-			String identityNumber, int birthYear) {
-		super(id, email, password);
-		id = id2;
+
+	public Candidate(int id, String firstName, String lastName, String identityNumber, int birthYear) {
+		super();
+		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.identityNumber = identityNumber;
 		this.birthYear = birthYear;
 	}
+
 
 	public int getId() {
 		return id;
@@ -81,6 +82,7 @@ public class Candidate extends User {
 	public void setBirthYear(int birthYear) {
 		this.birthYear = birthYear;
 	}
+
 	
 
 }
