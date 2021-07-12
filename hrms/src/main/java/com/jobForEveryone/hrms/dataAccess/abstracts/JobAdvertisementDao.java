@@ -14,4 +14,6 @@ public interface JobAdvertisementDao extends JpaRepository<JobAdvertisement, Int
 	
 	@Query("From JobAdvertisement where employer.companyName=:companyName and status = true")
 	List<JobAdvertisement> getAllEmployerAndStatusTrue(String companyName);
+	
+
 }

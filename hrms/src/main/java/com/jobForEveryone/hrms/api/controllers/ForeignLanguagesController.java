@@ -9,27 +9,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jobForEveryone.hrms.business.abstracts.CityService;
+import com.jobForEveryone.hrms.business.abstracts.ForeignLanguageService;
 import com.jobForEveryone.hrms.core.utilities.results.DataResult;
 import com.jobForEveryone.hrms.core.utilities.results.Result;
-import com.jobForEveryone.hrms.entities.concretes.City;
+import com.jobForEveryone.hrms.entities.concretes.ForeignLanguage;
 
 @RestController
-@RequestMapping("api/cities")
-public class CitiesController {
+@RequestMapping("api/foreignlanguages")
+public class ForeignLanguagesController {
 	
-	private CityService cityService;
-
+	private ForeignLanguageService foreignLanguageService;
+	
 	@Autowired
-	public CitiesController(CityService cityService) {
+	public ForeignLanguagesController(ForeignLanguageService foreignLanguageService) {
 		super();
-		this.cityService = cityService;
+		this.foreignLanguageService = foreignLanguageService;
 	}
-	
+
 	@GetMapping("/getall")
 	public ResponseEntity<?> getAll(){
 		
-		DataResult<?> result= this.cityService.getAll();
+		DataResult<?> result = this.foreignLanguageService.getAll();
 		
         if(result.isSuccess()){
             return ResponseEntity.ok(result);
@@ -38,16 +38,14 @@ public class CitiesController {
 	}
 	
 	@PostMapping("/add")
-    public ResponseEntity<?> add(@RequestBody City city) {
+	public ResponseEntity<?> add(@RequestBody ForeignLanguage foreignLanguage) {
 		
-		Result result = this.cityService.add(city);
+		Result result = this.foreignLanguageService.add(foreignLanguage);
 		
         if(result.isSuccess()){
             return ResponseEntity.ok(result);
         }
         return ResponseEntity.badRequest().body(result);
-		
-		
 	}
-	
+
 }

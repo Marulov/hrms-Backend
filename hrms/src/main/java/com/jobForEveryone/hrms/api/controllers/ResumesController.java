@@ -9,45 +9,45 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jobForEveryone.hrms.business.abstracts.CityService;
+import com.jobForEveryone.hrms.business.abstracts.ResumeService;
 import com.jobForEveryone.hrms.core.utilities.results.DataResult;
 import com.jobForEveryone.hrms.core.utilities.results.Result;
-import com.jobForEveryone.hrms.entities.concretes.City;
+import com.jobForEveryone.hrms.entities.concretes.Resume;
 
 @RestController
-@RequestMapping("api/cities")
-public class CitiesController {
+@RequestMapping("api/resumes")
+public class ResumesController {
 	
-	private CityService cityService;
+	private ResumeService resumeService;
 
 	@Autowired
-	public CitiesController(CityService cityService) {
+	public ResumesController(ResumeService resumeService) {
 		super();
-		this.cityService = cityService;
+		this.resumeService = resumeService;
 	}
 	
 	@GetMapping("/getall")
 	public ResponseEntity<?> getAll(){
 		
-		DataResult<?> result= this.cityService.getAll();
+		DataResult<?> result = this.resumeService.getAll();
 		
         if(result.isSuccess()){
             return ResponseEntity.ok(result);
         }
         return ResponseEntity.badRequest().body(result);
+		
 	}
 	
 	@PostMapping("/add")
-    public ResponseEntity<?> add(@RequestBody City city) {
+	public ResponseEntity<?> add(@RequestBody Resume resume) {
 		
-		Result result = this.cityService.add(city);
+		Result result = this.resumeService.add(resume);
 		
         if(result.isSuccess()){
             return ResponseEntity.ok(result);
         }
         return ResponseEntity.badRequest().body(result);
-		
-		
 	}
 	
+
 }

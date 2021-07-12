@@ -1,16 +1,21 @@
 package com.jobForEveryone.hrms.entities.concretes;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "job_experience")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","resumes","jobExperiences"})
 public class JobExperience {
 	
 	@Id
@@ -32,13 +37,18 @@ public class JobExperience {
 	
 	@Column(name = "is_still_work")
 	private boolean isStillWork;
+	
+	@OneToMany(mappedBy = "jobExperience")
+	private List<Resume> resumes;
 
 	public JobExperience() {
 		
 	}
 	
+
+
 	public JobExperience(int id, String companyName, String positionName, Date startingDate, Date completionDate,
-			boolean isStillWork) {
+			boolean isStillWork, List<Resume> resumes) {
 		super();
 		this.id = id;
 		this.companyName = companyName;
@@ -46,7 +56,10 @@ public class JobExperience {
 		this.startingDate = startingDate;
 		this.completionDate = completionDate;
 		this.isStillWork = isStillWork;
+		this.resumes = resumes;
 	}
+
+
 
 	public int getId() {
 		return id;
@@ -63,6 +76,18 @@ public class JobExperience {
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
 	}
+
+	public List<Resume> getJobExperiences() {
+		return resumes;
+	}
+
+
+
+	public void setJobExperiences(List<Resume> resumes) {
+		this.resumes = resumes;
+	}
+
+
 
 	public String getPositionName() {
 		return positionName;

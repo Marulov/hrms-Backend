@@ -14,6 +14,7 @@ import com.jobForEveryone.hrms.core.utilities.results.SuccessResult;
 import com.jobForEveryone.hrms.dataAccess.abstracts.JobAdvertisementDao;
 import com.jobForEveryone.hrms.entities.concretes.JobAdvertisement;
 
+
 @Service
 public class JobAdvertisementManager implements JobAdvertisementService{
 
@@ -65,5 +66,6 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 		this.jobAdvertisementDao.save(jobAdvertisementUpdate);
 		return new SuccessResult("İş ilanının statüsü değiştirildi.");
 	}
+
 
 }

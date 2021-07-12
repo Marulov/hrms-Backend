@@ -1,8 +1,8 @@
 package com.jobForEveryone.hrms.api.controllers;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,21 +27,36 @@ public class JobExperiencesController {
 	}
 	
 	@GetMapping("/getall")
-	public DataResult<List<JobExperience>> getAll(){
+	public ResponseEntity<?> getAll(){
 		
-		return this.jobExperienceService.getAll();
+		DataResult<?> result = this.jobExperienceService.getAll();
+		
+        if(result.isSuccess()){
+            return ResponseEntity.ok(result);
+        }
+        return ResponseEntity.badRequest().body(result);
 	}
 	
 	@GetMapping("/getAllSortedByCompletionDate")
-	public DataResult<List<JobExperience>> getAllSortedByCompletionDate(){
+	public ResponseEntity<?> getAllSortedByCompletionDate(){
 		
-		return this.jobExperienceService.getAllSortedByCompletionDate();
+		DataResult<?> result = this.jobExperienceService.getAllSortedByCompletionDate();
+		
+        if(result.isSuccess()){
+            return ResponseEntity.ok(result);
+        }
+        return ResponseEntity.badRequest().body(result);
 	}
 	
 	@PostMapping("/add")
-	public Result add(@RequestBody JobExperience jobExperience) {
+	public ResponseEntity<?> add(@RequestBody JobExperience jobExperience) {
 		
-		return this.jobExperienceService.add(jobExperience);
+		Result result = this.jobExperienceService.add(jobExperience);
+		
+        if(result.isSuccess()){
+            return ResponseEntity.ok(result);
+        }
+        return ResponseEntity.badRequest().body(result);
 	}
 	
 

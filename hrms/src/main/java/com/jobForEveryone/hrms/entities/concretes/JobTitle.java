@@ -25,7 +25,7 @@ public class JobTitle {
 	@Column(name="title")
 	private String title;
 	
-	@OneToMany(mappedBy = "job_title")
+	@OneToMany(mappedBy = "jobTitle")
 	private List<JobAdvertisement> jobAdvertisements;
 	
 	public JobTitle() {

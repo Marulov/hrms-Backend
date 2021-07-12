@@ -50,7 +50,7 @@ public class CandidateManager implements CandidateService{
 			return new ErrorResult("Tüm alanları doldurunuz!");
 		}
 		
-		else if(!checkEmail(candidate.getEmail())) {
+		if(!checkEmail(candidate.getEmail())) {
 			return new ErrorResult("Email kullanılmaktadır!");
 		}
 		

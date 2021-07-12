@@ -6,6 +6,7 @@ import com.jobForEveryone.hrms.core.utilities.results.DataResult;
 import com.jobForEveryone.hrms.core.utilities.results.Result;
 import com.jobForEveryone.hrms.entities.concretes.JobAdvertisement;
 
+
 public interface JobAdvertisementService {
 	
 	Result add(JobAdvertisement jobAdvertisement);
@@ -19,5 +20,7 @@ public interface JobAdvertisementService {
 	DataResult<List<JobAdvertisement>> getAllEmployerAndStatusTrue(String companyName);	
 	
 	Result update(int id , boolean status);
+	
+
 
 }

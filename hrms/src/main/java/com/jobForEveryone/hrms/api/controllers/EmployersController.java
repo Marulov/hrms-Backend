@@ -1,8 +1,8 @@
 package com.jobForEveryone.hrms.api.controllers;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,15 +27,25 @@ public class EmployersController {
 	}
 	
 	@GetMapping("/getall")
-	public DataResult<List<Employer>> getAll(){
+	public ResponseEntity<?> getAll(){
 		
-		return this.employerService.getAll();
+		DataResult<?> result = this.employerService.getAll();
+		
+        if(result.isSuccess()){
+            return ResponseEntity.ok(result);
+        }
+        return ResponseEntity.badRequest().body(result);
 	}
 	
 	@PostMapping("/add")
-	public Result add(@RequestBody Employer employer) {
+	public ResponseEntity<?> add(@RequestBody Employer employer) {
 		
-		return this.employerService.add(employer);
+		Result result = this.employerService.add(employer);
+		
+        if(result.isSuccess()){
+            return ResponseEntity.ok(result);
+        }
+        return ResponseEntity.badRequest().body(result);
 	}
 	
 

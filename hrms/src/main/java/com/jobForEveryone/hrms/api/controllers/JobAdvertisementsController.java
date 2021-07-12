@@ -1,8 +1,8 @@
 package com.jobForEveryone.hrms.api.controllers;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,36 +28,73 @@ public class JobAdvertisementsController {
 	}
 	
 	@GetMapping("/getAll")
-	public DataResult<List<JobAdvertisement>> getAll(){
-		return this.jobAdvertisementService.getAll();
+	public ResponseEntity<?> getAll(){
+		DataResult<?> result = this.jobAdvertisementService.getAll();
+		
+        if(result.isSuccess()){
+            return ResponseEntity.ok(result);
+        }
+        return ResponseEntity.badRequest().body(result);
+		
 	}
 	
 	@GetMapping("/getAllStatusTrue")
-	public DataResult<List<JobAdvertisement>> getAllStatusTrue(){
-		return this.jobAdvertisementService.getAllStatusTrue();
+	public ResponseEntity<?> getAllStatusTrue(){
+		
+		DataResult<?> result = this.jobAdvertisementService.getAllStatusTrue();
+		
+        if(result.isSuccess()){
+            return ResponseEntity.ok(result);
+        }
+        return ResponseEntity.badRequest().body(result);
 	}
 	
 	@PostMapping("/add")
-	public Result add(@RequestBody JobAdvertisement jobAdvertisement) {
-		return this.jobAdvertisementService.add(jobAdvertisement);
+	public ResponseEntity<?> add(@RequestBody JobAdvertisement jobAdvertisement) {
+		
+		Result result = this.jobAdvertisementService.add(jobAdvertisement);
+		
+        if(result.isSuccess()){
+            return ResponseEntity.ok(result);
+        }
+        return ResponseEntity.badRequest().body(result);
 	}
 	
 	@GetMapping("/getAllSortedByLastDate")
-	public DataResult<List<JobAdvertisement>> getAllSortedByLastDate(){
-		return this.jobAdvertisementService.getAllSortedByLastDate();
+	public ResponseEntity<?> getAllSortedByLastDate(){
+		
+		DataResult<?> result = this.jobAdvertisementService.getAllSortedByLastDate();
+		
+        if(result.isSuccess()){
+            return ResponseEntity.ok(result);
+        }
+        return ResponseEntity.badRequest().body(result);
 	}
 	
 	@GetMapping("/getAllEmployerAndStatusTrue")
-	public DataResult<List<JobAdvertisement>> getAllEmployerAndStatusTrue(@RequestParam("companyName") String companyName){
+	public ResponseEntity<?> getAllEmployerAndStatusTrue(@RequestParam("companyName") String companyName){
 		
-		return this.jobAdvertisementService.getAllEmployerAndStatusTrue(companyName);
+		DataResult<?> result = this.jobAdvertisementService.getAllEmployerAndStatusTrue(companyName);
+		
+        if(result.isSuccess()){
+            return ResponseEntity.ok(result);
+        }
+        return ResponseEntity.badRequest().body(result);
 		
 	}
 	
 	@PostMapping("/setStatus")
-	public Result update(int id , boolean status) {
-		return this.jobAdvertisementService.update(id, status);
+	public ResponseEntity<?> update(int id , boolean status) {
+		
+		Result result = this.jobAdvertisementService.update(id, status);
+		
+        if(result.isSuccess()){
+            return ResponseEntity.ok(result);
+        }
+        return ResponseEntity.badRequest().body(result);
 	}
+	
+
 	
 	
 

@@ -1,45 +1,61 @@
 package com.jobForEveryone.hrms.entities.concretes;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="candidates")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","resume","candidates"})
 public class Candidate extends User {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
 	private int id;
 	
 	@Column(name="first_name")
+	@NotBlank
+	@NotNull
 	private String firstName;		
 	
 	@Column(name="last_name")
+	@NotBlank
+	@NotNull
 	private String lastName;
 	
 	@Column(name="identity_number")
+	@NotBlank
+	@NotNull
 	private String identityNumber;
 	
 	@Column(name="birth_year")
 	private int birthYear;
 	
-	public Candidate() {
-		
-	}
-
-
-	public Candidate(int id, String firstName, String lastName, String identityNumber, int birthYear) {
+	
+	@OneToOne(mappedBy = "candidate")
+	private Resume resume;
+	
+	public Candidate(int id, String firstName, String lastName, String identityNumber, int birthYear,
+			Resume resume) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.identityNumber = identityNumber;
 		this.birthYear = birthYear;
+		this.resume = resume;
+	}
+
+
+	public Candidate() {
+		
 	}
 
 
@@ -81,6 +97,20 @@ public class Candidate extends User {
 
 	public void setBirthYear(int birthYear) {
 		this.birthYear = birthYear;
+	}
+
+
+
+
+	public Resume getCandidates() {
+		return resume;
+	}
+
+
+
+
+	public void setCandidates(Resume  resume) {
+		this.resume = resume;
 	}
 
 	

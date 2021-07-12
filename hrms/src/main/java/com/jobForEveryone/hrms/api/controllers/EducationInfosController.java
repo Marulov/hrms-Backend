@@ -1,8 +1,8 @@
 package com.jobForEveryone.hrms.api.controllers;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,21 +27,37 @@ public class EducationInfosController {
 	}
 	
 	@GetMapping("/getall")
-	public DataResult<List<EducationInfo>> getAll(){
+	public ResponseEntity<?> getAll(){
 		
-		return this.educationInfoService.getAll();
+		DataResult<?> result = this.educationInfoService.getAll();
+		
+        if(result.isSuccess()){
+            return ResponseEntity.ok(result);
+        }
+        return ResponseEntity.badRequest().body(result);
 	}
 	
 	@GetMapping("/getAllSortedByCompletionDate")
-	public DataResult<List<EducationInfo>> getAllSortedByCompletionDate(){
+	public ResponseEntity<?> getAllSortedByCompletionDate(){
 		
-		return this.educationInfoService.getAllSortedByCompletionDate();
+		DataResult<?> result = this.educationInfoService.getAllSortedByCompletionDate();
+		
+        if(result.isSuccess()){
+            return ResponseEntity.ok(result);
+        }
+        return ResponseEntity.badRequest().body(result);
+		
 	}
 	
 	@PostMapping("/add")
-	public Result add(@RequestBody EducationInfo educationInfo) {
+	public ResponseEntity<?> add(@RequestBody EducationInfo educationInfo) {
 		
-		return this.educationInfoService.add(educationInfo);
+		Result result = this.educationInfoService.add(educationInfo);
+		
+        if(result.isSuccess()){
+            return ResponseEntity.ok(result);
+        }
+        return ResponseEntity.badRequest().body(result);
 		
 	}
 	
